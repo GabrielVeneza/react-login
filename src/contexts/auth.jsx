@@ -1,6 +1,7 @@
 import { Children, createContext, useEffect, useState } from "react";
 
 
+
 export const AuthContext = createContext({})
 
 export const AuthProvider = ({ children }) => {
@@ -11,7 +12,8 @@ export const AuthProvider = ({ children }) => {
         const userToken = localStorage.getItem("user_token")
         const usersStorage = localStorage.getItem("users_bd")
 
-        console.log(localStorage)
+        // console.log(localStorage)
+        console.log(userToken)
         
         if ( userToken && usersStorage ) {
             const hasUser = JSON.parse(usersStorage)?.filter(
@@ -29,9 +31,9 @@ export const AuthProvider = ({ children }) => {
         const hasUser = usersStorage?.filter((user) => user.email === email)
 
         if ( hasUser?.length ) {
-            if ( hasUser[0].email  === email && hasUser[0].password === password ) {
+            if ( hasUser[0].email === email && hasUser[0].password === password ) {
                 const token = Math.random().toString(36).substring(2)
-                localStorage.setItem("user_token", JSON.stringify({ email, token }))
+                localStorage.setItem("user_token", JSON.stringify({ token }))
                 setUser({ email, password })
                 
                 return;
