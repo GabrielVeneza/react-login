@@ -9,7 +9,9 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const userToken = localStorage.getItem("user_token")
-        const usersStorage = localStorage.getItem("users.bd")
+        const usersStorage = localStorage.getItem("users_bd")
+
+        console.log(localStorage)
         
         if ( userToken && usersStorage ) {
             const hasUser = JSON.parse(usersStorage)?.filter(
@@ -21,8 +23,8 @@ export const AuthProvider = ({ children }) => {
     }, [])
     
     const signin = ( email, password ) => {
-
-        const usersStorage = JSON.parse(localStorage.getItem("users.bd"))
+        
+        const usersStorage = JSON.parse(localStorage.getItem("users_bd"))
 
         const hasUser = usersStorage?.filter((user) => user.email === email)
 
@@ -43,9 +45,9 @@ export const AuthProvider = ({ children }) => {
     }
 
     const signup = ( email, password ) => {
-        const usersStorage = JSON.parse(localStorage.getItem("users_bd"))
+        const usersStorage = JSON.parse(localStorage.getItem("users_bd"));
 
-        const hasUser = usersStorage?.filter((user) => user.email === email)
+        const hasUser = usersStorage?.filter((user) => user.email === email);
         
         if ( hasUser?.length ) {
             return "Já exixte um usuário com este e-mail"
